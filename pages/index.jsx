@@ -4,17 +4,10 @@ import classNames from "classnames/bind";
 import Sidebar from "../components/sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import { useEffect } from "react";
 
 const cx = classNames.bind(styles);
 
 export default function Home() {
-  useEffect(() => {
-    const devices = axios.get("http://localhost:3000/api/devices");
-    console.log(devices);
-  }, []);
-
   return (
     <div>
       <Head>
@@ -36,15 +29,8 @@ export default function Home() {
           </div>
           <div className={cx("content")}>
             <div className={cx("table-content")}>
-              <table id="dashboardTable">
-                <tr>
-                  <th>Device</th>
-                  <th>MAC Address</th>
-                  <th>IP</th>
-                  <th>Create Date</th>
-                  <th>Power Consumption (kW/h)</th>
-                </tr>
-                <tbody></tbody>
+              <table className="dashboardTable">
+                <tr></tr>
               </table>
             </div>
             <div className={cx("grap-content")}>
@@ -58,21 +44,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = true;
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }

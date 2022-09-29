@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/login.module.scss";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const cx = classNames.bind(styles);
@@ -10,6 +10,11 @@ export default function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [warning, setWarning] = useState(false);
+
+  useEffect(() => {
+    const data = axios.get("http://localhost:3000/api/devices");
+    console.log(data);
+  }, []);
 
   const handleLogin = async event => {
     event.preventDefault();

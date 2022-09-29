@@ -8,8 +8,8 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const devicesPower = await devices.find({});
-        res.status(200).json({ success: true, data: devicesPower });
+        // const devicesPower); = await devices.find({}
+        res.status(200).json({ success: true, data: { a: "abc" } });
       } catch (error) {
         res.status(400).json({ success: false });
       }
