@@ -1,37 +1,33 @@
 import styles from "../styles/sidebar.module.scss";
 import classNames from "classnames/bind";
 import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars,
   faCameraRetro,
   faChartSimple,
   faHourglassEnd,
   faGear,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef } from "react";
-config.autoAddCss = false;
+import { useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const cx = classNames.bind(styles);
 
 export default function Sidebar() {
-  const sidebar = useRef();
+  const option = useRef();
+  const router = useRouter();
+  const currentRoute = router.pathname;
 
-  const sidebarShow = () => {
-    const ss = document.getElementById("nav");
-    console.log(sidebar.current);
-    ss.style.left = "0";
-    sidebar.current.classList.add("nav-show");
+  const showOption = () => {
+    option.current.style.display = "block";
   };
-
   return (
     <>
-      <label htmlFor="check" className={cx("checkbtn")}>
-        <FontAwesomeIcon icon={faBars} onClick={sidebarShow} />
-      </label>
-      <nav className={cx("nav-container")} ref={sidebar} id="nav">
+      <nav className={cx("nav-container")} id="nav">
         <div className={cx("userbox-backup")}>
           <FontAwesomeIcon icon={faCircleUser} />
           <span id="welcometop">Welcome John</span>
@@ -43,22 +39,34 @@ export default function Sidebar() {
         <ul className={cx("nav-list")}>
           <li>
             <FontAwesomeIcon icon={faChartSimple} className={cx("icon")} />
-            <a data-active="dashboard" className={cx("option")}>
-              Dashboard
-            </a>
+            <Link href="/">
+              <a
+                data-active="dashboard"
+                className={cx("option", { active: currentRoute === "/" })}
+              >
+                Dashboard
+              </a>
+            </Link>
           </li>
           <li>
             <FontAwesomeIcon icon={faHourglassEnd} className={cx("icon")} />
-            <a data-active="logs" className={cx("option", "logs")}>
-              Logs
-            </a>
+            <Link href="/logs">
+              <a
+                data-active="logs"
+                className={cx("option", "logs", {
+                  active: currentRoute === "/logs",
+                })}
+              >
+                Logs
+              </a>
+            </Link>
           </li>
-          <li id="setting" className={cx("setting1")}>
+          <li id="setting" className={cx("setting")} onFocus={showOption}>
             <FontAwesomeIcon icon={faGear} className={cx("icon")} />
             <a data-active="setting" className={cx("option")}>
               Setting
             </a>
-            <ul className={cx("extend")} id="extend">
+            <ul className={cx("extend")} id="extend" ref={option}>
               <li className={cx("logout")}>
                 <button className={cx("logout-btn")}>Logout</button>
               </li>

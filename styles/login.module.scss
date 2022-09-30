@@ -1,20 +1,8 @@
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-    /* font-size: 14px; */
-  }
-  to {
-    transform: rotate(360deg);
-    font-size: 20px;
-  }
-}
 .logo-title {
   position: relative;
   margin: 0;
   padding: 2em 0 1em;
   color: rgb(0, 0, 0);
-  /* color: rgba(200,200,255,0.5); */
-  /* text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 5px rgb(102, 102, 124), 0 0 5px rgb(85, 85, 133);  */
   text-align: center;
   font-weight: 800;
   -webkit-transition: all 0.3s;
@@ -28,7 +16,7 @@
   left: 40%;
   top: 30%;
   width: 340px;
-  height: 22vh;
+  height: 220px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .login-title {

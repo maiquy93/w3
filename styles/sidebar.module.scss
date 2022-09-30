@@ -22,32 +22,11 @@
   transition: all 0.3s;
   padding-bottom: 0;
 }
-
-/* dashboard */
-.wrapper {
-  display: flex;
-}
-
-.content {
-  height: 100vh;
-  background-color: rgba(192, 192, 192, 0.137);
-  width: 100%;
-}
-.header {
-  /* width: 100%; */
-  padding-top: 13px;
-  font-size: 18px;
-  height: 5%;
-  background-color: rgb(255, 255, 255);
-  text-align: right;
-}
-.user-box {
-  margin-right: 20px;
-}
 .userbox-backup {
   display: none;
 }
 .nav-container {
+  width: 100%;
   margin-left: 5px;
   display: flex;
   flex-direction: column;
@@ -137,6 +116,8 @@ nav a.active {
   list-style-type: none;
   color: red !important;
   font-size: 10px;
+  display: none;
+  transition: all -0.3s;
 }
 .logout {
   width: 30%;
@@ -152,7 +133,7 @@ nav a.active {
 #setting {
   color: red !important;
 }
-.setting1:hover ~ .extend {
+.setting:hover .extend {
   display: block !important;
   color: aqua;
 }
@@ -187,111 +168,26 @@ nav a.active {
 .checkbar {
   display: none;
 }
-@media (max-width: 1440px) {
-  .logo {
-    font-size: 20px;
-  }
-  .nav-list li a {
-    font-size: 20px;
-  }
-}
-@media (max-width: 1000px) {
-  .logo {
-    font-size: 18px;
-  }
-}
-@media (max-width: 980px) {
-  .checkbtn {
-    display: none;
-  }
-}
-@media (max-width: 920px) {
-  .nav-container .logo {
-    font-size: 20px;
-    display: inline;
-  }
-  .nav-list li a {
-    font-size: 18px;
-  }
-}
-@media screen and (max-width: 800px) {
-  .nav-container {
-    position: fixed;
-    width: 25%;
-    margin-left: 0;
-    left: 0;
-    transition: all 0.5s;
-    z-index: 999;
-    background-color: rgb(255, 255, 255);
-    nav ul li {
-      font-size: 14px;
-      margin-left: 10px;
-      width: 100%;
-    }
-  }
-  .checkbtn {
-    display: block;
-    // position: absolute;
-    right: 0;
-    font-size: 16px;
-  }
-  .logo {
-    font-size: 18px !important;
-    margin-left: 5px;
-  }
-  .option {
-    font-size: 14px;
-  }
-  .header {
-    display: none;
-  }
+@media (max-width: 800px) {
   .userbox-backup {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    color: rgb(21, 21, 141);
+    display: flex !important;
+    flex-direction: column;
     display: block;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
+    font-size: 18px;
   }
-  .nav-show {
-    left: 0;
+  .logout-btn {
+    font-size: auto;
   }
-  /* Content */
-  .table-content {
-    display: none;
-  }
-  .grap-content {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    /* width: 80%; */
-  }
-  .grap {
-    width: 100%;
-  }
-  .device {
-    margin-top: 20px;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .device .adddevice-btn {
-    margin-bottom: 15px;
+  .extend {
+    margin-left: 10px;
   }
 }
-
 @media (max-width: 550px) {
   .table-content table {
     font-size: 14px;
   }
 }
 @media (max-width: 414px) {
-  .nav-container {
-    width: 35%;
-  }
   .logo {
     margin-top: 0;
     font-size: 14px !important  ;
@@ -309,12 +205,10 @@ nav a.active {
   }
 }
 @media (max-width: 375px) {
-  .grap {
-    height: 50vh;
+  .userbox-backup {
+    font-size: 15px;
   }
-  .nav-container {
-    width: 35%;
-  }
+
   .logo {
     display: inline-block;
     font-size: 12px;
