@@ -35,6 +35,7 @@ function Layout({ children }) {
   const hideSidebar = () => {
     sidebar.current.style.left = "-100%";
   };
+
   if (currentRoute === "/signup") return <Signup />;
 
   if (!isLogin)

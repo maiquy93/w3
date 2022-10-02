@@ -75,6 +75,19 @@
   border: none;
   color: rgb(21, 100, 202);
 }
+.signup-container {
+  display: block;
+  position: absolute;
+  left: 40%;
+  top: 25%;
+  width: 340px;
+  height: 320px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  .warning {
+    font-size: 14px;
+    margin: 0;
+  }
+}
 
 @media (max-width: 800px) {
   .form-container {

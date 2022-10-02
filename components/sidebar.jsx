@@ -25,6 +25,12 @@ export default function Sidebar() {
   const showOption = () => {
     option.current.style.display = "block";
   };
+
+  const logout = () => {
+    localStorage.setItem("isLogin", false);
+    window.location.href = "/login";
+  };
+
   return (
     <>
       <nav className={cx("nav-container")} id="nav">
@@ -68,7 +74,9 @@ export default function Sidebar() {
             </a>
             <ul className={cx("extend")} id="extend" ref={option}>
               <li className={cx("logout")}>
-                <button className={cx("logout-btn")}>Logout</button>
+                <button className={cx("logout-btn")} onClick={logout}>
+                  Logout
+                </button>
               </li>
             </ul>
           </li>
