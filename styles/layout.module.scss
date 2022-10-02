@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #dddadaa6;
+  background-color: #d8d8d860;
   flex: 1 !important;
   height: 100vh;
 }
@@ -38,7 +38,17 @@
 .user-box {
   margin-right: 20px;
 }
-
+.root {
+  .isLoginPage {
+    background-color: transparent !important;
+    // display: none;
+  }
+}
+.wrapper {
+  .isLoginPage {
+    display: none !important;
+  }
+}
 @media (max-width: 1366px) {
 }
 
@@ -62,8 +72,14 @@
   .sidebar {
     width: auto !important;
   }
+  .header {
+    display: none !important;
+  }
 }
 @media (max-width: 375px) {
+  .content-container {
+    height: 100vh;
+  }
   .sidebar {
     width: auto !important;
   }

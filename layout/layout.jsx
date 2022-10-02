@@ -7,15 +7,25 @@ import React from "react";
 import Sidebar from "../components/sidebar";
 import Login from "../pages/login";
 import Signup from "../pages/signup";
-import { useRef } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 
 const cx = classNames.bind(styles);
 
 function Layout({ children }) {
-  const isLogin = true;
   const route = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
   const currentRoute = route.pathname;
+
+  // useEffect(() => {
+  //   if (currentRoute === "/login") route.push("/");
+  // }, [currentRoute]);
+
+  useEffect(() => {
+    setIsLogin(JSON.parse(localStorage?.getItem("isLogin")) || false);
+  }, []);
+
+  const isLoginPage = currentRoute === "/login";
 
   const sidebar = useRef();
   const sidebarShow = () => {
@@ -44,30 +54,38 @@ function Layout({ children }) {
     );
 
   return (
-    <div>
+    <div className={cx("root")}>
       <Head>
         <title>{"next-app"}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className={cx("wrapper")}>
-        <label htmlFor="check" className={cx("checkbtn")}>
-          <FontAwesomeIcon icon={faBars} onClick={sidebarShow} />
-        </label>
-        <div className={cx("sidebar")} ref={sidebar}>
-          <Sidebar />
-        </div>
+      <div className={cx("wrapper", { isLoginPage })}>
+        {!isLoginPage && (
+          <label htmlFor="check" className={cx("checkbtn")}>
+            <FontAwesomeIcon icon={faBars} onClick={sidebarShow} />
+          </label>
+        )}
+        {
+          <div className={cx("sidebar", { isLoginPage })} ref={sidebar}>
+            <Sidebar />
+          </div>
+        }
         <div className={cx("content-container")} onClick={hideSidebar}>
-          <div className={cx("header")}>
-            <div className={cx("user-box")}>
-              <FontAwesomeIcon icon={faCircleUser} />
-              <span id="welcome" className={cx("username")}>
-                Welcome John
-              </span>
+          {!isLoginPage && (
+            <div className={cx("header")}>
+              <div className={cx("user-box")}>
+                <FontAwesomeIcon icon={faCircleUser} />
+                <span id="welcome" className={cx("username")}>
+                  Welcome John
+                </span>
+              </div>
             </div>
-          </div>
-          <div className={cx("content")}>
-            <main>{children}</main>
-          </div>
+          )}
+          {
+            <div className={cx("content")}>
+              <main>{children}</main>
+            </div>
+          }
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../styles/login.module.scss";
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
+import { NextResponse, NextRequest } from "next/server";
 import axios from "axios";
 
 const cx = classNames.bind(styles);
@@ -12,19 +13,20 @@ export default function Login() {
   const [warning, setWarning] = useState(false);
 
   useEffect(() => {
-    const data = axios.get("http://localhost:3000/api/devices");
-    console.log(data);
+    localStorage.setItem("isLogin", localStorage?.getItem("isLogin") || false);
   }, []);
-
   const handleLogin = async event => {
     event.preventDefault();
     try {
       if (username && password) {
-        const res = await axios.post("http://localhost:3000/api/admin", {
+        const res = await axios.post("http://localhost:8000/login/request", {
           username: username,
           password: password,
         });
-        if (res.data.login) {
+        if (res.data) {
+          alert("ok");
+          localStorage.setItem("isLogin", true);
+          window.location.href = "/";
         } else {
           setWarning(true);
         }

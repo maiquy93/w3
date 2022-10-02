@@ -215,6 +215,13 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
+"@types/react-table@^6.8.5":
+  version "6.8.9"
+  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-6.8.9.tgz#0925879352e4c15b9b9a7087481ac4268bf8e5ae"
+  integrity sha512-fVQXjy/EYDbgraScgjDONA291McKqGrw0R0NeK639fx2bS4T19TnXMjg3FjOPlkI3qYTQtFTPADlRYysaQIMpA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@18.0.21":
   version "18.0.21"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.0.21.tgz"
@@ -499,7 +506,7 @@ chart.js@^3.9.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-classnames@^2.3.2:
+classnames@^2.2.5, classnames@^2.3.2:
   version "2.3.2"
   resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
@@ -1697,7 +1704,7 @@ react-dom@18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-is@^16.13.1, react-is@^16.7.0:
+react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -1719,10 +1726,14 @@ react-redux@^8.0.4:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
-react-table@^7.8.0:
-  version "7.8.0"
-  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.8.0.tgz#07858c01c1718c09f7f1aed7034fcfd7bda907d2"
-  integrity sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==
+react-table@6:
+  version "6.11.5"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-6.11.5.tgz#84e52885db426a07a6c4ce2c7e942f2cd4e2aa58"
+  integrity sha512-LM+AS9v//7Y7lAlgTWW/cW6Sn5VOb3EsSkKQfQTzOW8FngB1FUskLLNEVkAYsTX9LjOWR3QlGjykJqCE6eXT/g==
+  dependencies:
+    "@types/react-table" "^6.8.5"
+    classnames "^2.2.5"
+    react-is "^16.8.1"
 
 react@18.2.0:
   version "18.2.0"

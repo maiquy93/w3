@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import formatDate from "../utills/formatdate";
+import genMAC from "../utills/genMac";
 
 const cx = classNames.bind(styles);
 
@@ -19,25 +21,36 @@ export default function Home() {
   const [emptyPower, setEmpty] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/devices")
-      .then(res => setData(res.data.data));
+    axios.get("http://localhost:8000/devices").then(res => setData(res.data));
   }, []);
 
   //get new device
-  const getNewDevice = e => {
+  const getNewDevice = async e => {
     e.preventDefault();
     const numberRegex = /^\d*(\.\d+)?$/gm;
 
     if (deviceName && devieIP && power && power.match(numberRegex)) {
-      let newDevice = {
+      // let newDevice = {
+      //   name: deviceName,
+      //   mac: genMAC(),
+      //   ip: devieIP,
+      //   createdAt: Date.now(),
+      //   power: Number(power),
+      // };
+      await axios.post("http://localhost:8000/adddevice", {
         name: deviceName,
         mac: genMAC(),
         ip: devieIP,
         createdAt: Date.now(),
         power: Number(power),
-      };
-      //post API
+      });
+      //re-render
+      await axios
+        .get("http://localhost:8000/devices")
+        .then(res => setData(res.data));
+      setDeviceName("");
+      setDeviceIP("");
+      setPower("");
     } else {
       if (!deviceName) setNameWarning(true);
       if (!devieIP) setIPwarning(true);
@@ -45,18 +58,6 @@ export default function Home() {
       if (!power.match(numberRegex)) setPowerWarning(true);
     }
   };
-  //format date
-  function formatDate(date) {
-    var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-
-    return [year, month, day].join("-");
-  }
   //total
   function total(data) {
     let sum = 0;
@@ -161,7 +162,10 @@ export default function Home() {
               name="device"
               placeholder="name"
               value={deviceName}
-              onChange={e => setDeviceName(e.target.value)}
+              onChange={e => {
+                setDeviceName(e.target.value);
+                setNameWarning(false);
+              }}
               required
             />
             {nameWarning && (
@@ -172,7 +176,10 @@ export default function Home() {
             <input
               placeholder="IP"
               value={devieIP}
-              onchange={e => setDeviceIP(e.target.value)}
+              onChange={event => {
+                setDeviceIP(event.target.value);
+                setIPwarning(false);
+              }}
               required
             />
             {ipWarning && (
@@ -182,7 +189,11 @@ export default function Home() {
             )}
             <input
               placeholder="Power"
-              onChange={e => setPower(e.target.value)}
+              onChange={e => {
+                setPower(e.target.value);
+                setPowerWarning(false);
+                setEmpty(false);
+              }}
               value={power}
             />
             {emptyPower && (

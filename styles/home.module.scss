@@ -29,6 +29,12 @@
   width: 49%;
   background-color: #fff;
   height: 50vh;
+  input {
+    // outline: none;
+    &:focus {
+      outline-color: rgba(35, 167, 190, 0.233);
+    }
+  }
 }
 .table-content table {
   background-color: #fff;
