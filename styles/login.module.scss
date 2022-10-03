@@ -62,7 +62,7 @@
   border-radius: 5px;
   color: #fff;
   font-weight: 700;
-  font-size: 10px;
+  font-size: auto;
 }
 .nocshow {
   margin-top: 1vh;
@@ -81,12 +81,19 @@
   left: 40%;
   top: 25%;
   width: 340px;
-  height: 320px;
+  height: auto;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   .warning {
     font-size: 14px;
-    margin: 0;
+    margin: 5px 0;
   }
+}
+.cancel {
+  background-color: rgb(241, 9, 152);
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 700;
+  box-shadow: rgba(241, 2, 2, 0.466) 0px 3px 8px;
 }
 
 @media (max-width: 800px) {

@@ -118,6 +118,7 @@ nav a.active {
   font-size: 10px;
   display: none;
   transition: all -0.3s;
+  margin-left: -10px;
 }
 .logout {
   width: 30%;
@@ -168,6 +169,11 @@ nav a.active {
 .checkbar {
   display: none;
 }
+@media (max-width: 1220px) {
+  .extend {
+    margin-left: auto;
+  }
+}
 @media (max-width: 800px) {
   .userbox-backup {
     display: flex !important;
@@ -175,11 +181,11 @@ nav a.active {
     display: block;
     font-size: 18px;
   }
-  .logout-btn {
-    font-size: auto;
-  }
   .extend {
     margin-left: 10px;
+  }
+  .logout-btn {
+    font-size: auto;
   }
 }
 @media (max-width: 550px) {

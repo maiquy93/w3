@@ -11,13 +11,19 @@ import {
   faGear,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 const cx = classNames.bind(styles);
 
 export default function Sidebar() {
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    setCurrentUser(JSON.parse(localStorage?.getItem("currentUser")) || {});
+  }, []);
+
   const option = useRef();
   const router = useRouter();
   const currentRoute = router.pathname;
@@ -28,6 +34,7 @@ export default function Sidebar() {
 
   const logout = () => {
     localStorage.setItem("isLogin", false);
+    localStorage.setItem("currentUser", JSON.parse(null));
     window.location.href = "/login";
   };
 
@@ -36,7 +43,7 @@ export default function Sidebar() {
       <nav className={cx("nav-container")} id="nav">
         <div className={cx("userbox-backup")}>
           <FontAwesomeIcon icon={faCircleUser} />
-          <span id="welcometop">Welcome John</span>
+          <span id="welcometop">{`Welcome ${currentUser.username}`}</span>
         </div>
         <div className={cx("logo")}>
           <FontAwesomeIcon icon={faCameraRetro} className={cx("icon")} />

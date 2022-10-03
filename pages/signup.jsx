@@ -1,6 +1,7 @@
 import styles from "../styles/login.module.scss";
 import classNames from "classnames/bind";
 import { useState } from "react";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
@@ -11,10 +12,16 @@ export default function Signup() {
   const [emptyUsername, setEmptyUsername] = useState(false);
   const [existsUsername, setExist] = useState(false);
   const [emptyPassword, setEmptyPassword] = useState(false);
+  const [incorrectPassword, setIncorectLength] = useState(false);
   const [emptyRepassword, setEmptyRepassword] = useState(false);
   const [incorrectRepassword, setIncorectRepassword] = useState(false);
 
-  const checkAccount = () => {};
+  const checkAccount = async () => {
+    const res = await axios.post("http://localhost:8000/checkacc", {
+      username: username,
+    });
+    if (!res.data) setExist(true);
+  };
 
   const createAccount = async e => {
     e.preventDefault();
@@ -23,13 +30,20 @@ export default function Signup() {
     if (!repassword) setEmptyRepassword(true);
     if (repassword !== password) setIncorectRepassword(true);
     if (
-      !emptyUsername &&
+      username &&
       !existsUsername &&
-      !emptyPassword &&
-      !emptyRepassword &&
-      !incorrectRepassword
+      password.length >= 6 &&
+      repassword === password
     ) {
-      // call API
+      const response = await axios.post("http://localhost:8000/createnewacc", {
+        username: username,
+        password: password,
+      });
+      console.log(response.data);
+      if (response.data == true) {
+        alert("Your account has been created");
+        window.location.href = "/login";
+      }
     }
   };
 
@@ -45,8 +59,9 @@ export default function Signup() {
             onChange={e => {
               setUserName(e.target.value);
               setEmptyUsername(false);
+              setExist(false);
             }}
-            required
+            onBlur={checkAccount}
           />
           {emptyUsername && (
             <span className={cx("warning", "nocshow")}>
@@ -64,12 +79,20 @@ export default function Signup() {
             placeholder="password"
             onChange={e => {
               setPassword(e.target.value), setEmptyPassword(false);
+              setIncorectLength(false);
             }}
-            required
+            onBlur={() => {
+              if (password.length < 6) setIncorectLength(true);
+            }}
           />
           {emptyPassword && (
             <span className={cx("warning", "nocshow")}>
               Enter your password
+            </span>
+          )}
+          {incorrectPassword && (
+            <span className={cx("warning", "nocshow")}>
+              Password at least 6 character
             </span>
           )}
           <input
@@ -81,7 +104,6 @@ export default function Signup() {
               setIncorectRepassword(false);
               setEmptyRepassword(false);
             }}
-            required
           />
           {emptyRepassword && (
             <span className={cx("warning", "nocshow")}>
@@ -90,15 +112,23 @@ export default function Signup() {
           )}
           {incorrectRepassword && (
             <span className={cx("warning", "nocshow")}>
-              Re-enter password ncorrect
+              Re-enter password incorrect
             </span>
           )}
         </div>
         <div className={cx("login-nav")}>
-          <button className={cx("login-btn")} onClick={createAccount}>
-            LOGIN
+          <button className={cx("login-btn")} onClick={e => createAccount(e)}>
+            Create
           </button>
-          <button className={cx("create-btn")}>or create new acount</button>
+          <button
+            className={cx("create-btn", "cancel")}
+            onClick={e => {
+              e.preventDefault();
+              window.location.href = "/login";
+            }}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>

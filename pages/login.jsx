@@ -24,8 +24,11 @@ export default function Login() {
           password: password,
         });
         if (res.data) {
-          alert("ok");
           localStorage.setItem("isLogin", true);
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({ username: username })
+          );
           window.location.href = "/";
         } else {
           setWarning(true);
@@ -51,7 +54,6 @@ export default function Login() {
               setUserName(e.target.value);
               setWarning(false);
             }}
-            required
           />
           <input
             className={cx("login-input", "password")}
@@ -62,7 +64,6 @@ export default function Login() {
               setPassword(e.target.value);
               setWarning(false);
             }}
-            required
           />
           {warning && (
             <span className={cx("warning", "nocshow")}>
@@ -77,7 +78,15 @@ export default function Login() {
           >
             LOGIN
           </button>
-          <button className={cx("create-btn")}>or create new acount</button>
+          <button
+            className={cx("create-btn")}
+            onClick={e => {
+              e.preventDefault();
+              window.location.href = "/signup";
+            }}
+          >
+            or create new acount
+          </button>
         </div>
       </form>
     </div>

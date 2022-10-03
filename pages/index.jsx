@@ -30,13 +30,6 @@ export default function Home() {
     const numberRegex = /^\d*(\.\d+)?$/gm;
 
     if (deviceName && devieIP && power && power.match(numberRegex)) {
-      // let newDevice = {
-      //   name: deviceName,
-      //   mac: genMAC(),
-      //   ip: devieIP,
-      //   createdAt: Date.now(),
-      //   power: Number(power),
-      // };
       await axios.post("http://localhost:8000/adddevice", {
         name: deviceName,
         mac: genMAC(),
@@ -118,7 +111,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={cx("table-content")}>
-        <table className="dashboardTable">
+        <table className={cx("dashboardTable")}>
           <thead>
             <tr>
               <td>Divce</td>

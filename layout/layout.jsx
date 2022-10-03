@@ -15,14 +15,12 @@ const cx = classNames.bind(styles);
 function Layout({ children }) {
   const route = useRouter();
   const [isLogin, setIsLogin] = useState(false);
+  const [currentUser, setCurrentUser] = useState();
   const currentRoute = route.pathname;
-
-  // useEffect(() => {
-  //   if (currentRoute === "/login") route.push("/");
-  // }, [currentRoute]);
 
   useEffect(() => {
     setIsLogin(JSON.parse(localStorage?.getItem("isLogin")) || false);
+    setCurrentUser(JSON.parse(localStorage?.getItem("currentUser")) || null);
   }, []);
 
   const isLoginPage = currentRoute === "/login";
@@ -77,7 +75,7 @@ function Layout({ children }) {
               <div className={cx("user-box")}>
                 <FontAwesomeIcon icon={faCircleUser} />
                 <span id="welcome" className={cx("username")}>
-                  Welcome John
+                  {`Welcome ${currentUser.username}`}
                 </span>
               </div>
             </div>
